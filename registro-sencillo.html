@@ -1,162 +1,156 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Sistema de Login</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.12.2/axios.min.js"></script>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
-        body { background: #f5f5f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .container { background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
-        h2 { text-align: center; margin-bottom: 1.5rem; color: #333; }
-        .form-group { margin-bottom: 1rem; }
-        label { display: block; margin-bottom: 0.5rem; color: #555; }
-        input { width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem; }
-        button { width: 100%; padding: 0.75rem; background: #007bff; color: white; border: none; border-radius: 5px; font-size: 1rem; cursor: pointer; }
-        button:hover { background: #0056b3; }
-        .message { margin-top: 1rem; padding: 0.75rem; border-radius: 5px; text-align: center; }
-        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
-        .hidden { display: none; }
-        .user-info { background: #e9ecef; padding: 1rem; border-radius: 5px; margin-top: 1rem; }
-        .logout-btn { background: #dc3545; margin-top: 1rem; }
-        .logout-btn:hover { background: #c82333; }
-    </style>
-</head>
-<body>
-    <!-- Contenedor de Login -->
-    <div class="container" id="loginContainer">
-        <h2>Iniciar Sesión</h2>
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="username">Usuario:</label>
-                <input type="text" id="username" placeholder="Ingresa tu usuario" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" placeholder="Ingresa tu contraseña" required>
-            </div>
-            <button type="submit">Iniciar Sesión</button>
-        </form>
-        <div id="loginMessage"></div>
-        
-        <!-- Usuarios de prueba -->
-        <div style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 5px; font-size: 0.9rem;">
-            <strong>Usuarios de prueba:</strong><br>
-            Usuario: admin | Contraseña: 123456<br>
-            Usuario: usuario | Contraseña: password
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel de Control - Health Track</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles/global.css" />
+    <link rel="stylesheet" href="styles/dashboard.css" />
+  </head>
+  <body>
+    <header class="dashboard-header">
+      <div class="header-content">
+        <div class="logo">
+          <div class="logo-icon">
+            <i class="fas fa-heartbeat"></i>
+          </div>
+          <span>Health Track</span>
         </div>
-    </div>
-
-    <!-- Contenedor del Dashboard (oculto inicialmente) -->
-    <div class="container hidden" id="dashboardContainer">
-        <h2>Bienvenido, <span id="userName"></span>!</h2>
-        <div class="user-info">
-            <p><strong>Email:</strong> <span id="userEmail"></span></p>
-            <p><strong>Rol:</strong> <span id="userRole"></span></p>
-            <p><strong>Último acceso:</strong> <span id="lastLogin"></span></p>
+        <div class="user-menu">
+          <div class="user-info">
+            <div class="user-name" id="userName">Usuario</div>
+            <div class="user-email" id="userEmail">usuario@email.com</div>
+          </div>
+          <button class="btn btn-logout" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+          </button>
         </div>
-        <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
-    </div>
+      </div>
+    </header>
 
-    <script>
-        // Base de datos simulada de usuarios
-        const users = {
-            'admin': { 
-                password: '123456', 
-                name: 'Administrador', 
-                email: 'admin@miempresa.com',
-                role: 'Administrador'
-            },
-            'usuario': { 
-                password: 'password', 
-                name: 'Juan Pérez', 
-                email: 'juan@miempresa.com',
-                role: 'Usuario Regular'
-            }
-        };
+    <nav class="dashboard-nav">
+      <div class="nav-content">
+        <ul class="nav-links">
+          <li>
+            <a href="#" class="active"><i class="fas fa-home"></i> Inicio</a>
+          </li>
+          <li>
+            <a href="./estadisticas.html"
+              ><i class="fas fa-chart-line"></i> Estadísticas</a
+            >
+          </li>
+          <li>
+            <a href="./nutricion.html"
+              ><i class="fas fa-utensils"></i> Nutrición</a
+            >
+          </li>
+          <li>
+            <a href="./actividad.html"
+              ><i class="fas fa-running"></i> Actividad</a
+            >
+          </li>
+          <li>
+            <a href="./sueno.html"><i class="fas fa-bed"></i> Sueño</a>
+          </li>
+          <li>
+            <a href="recordatorio.html"
+              ><i class="fas fa-bell"></i> Recordatorios</a
+            >
+          </li>
+          <li>
+            <a href="perfil.html"><i class="fas fa-user"></i> Mi Perfil</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-        // Elementos del DOM
-        const loginContainer = document.getElementById('loginContainer');
-        const dashboardContainer = document.getElementById('dashboardContainer');
-        const loginForm = document.getElementById('loginForm');
-        const loginMessage = document.getElementById('loginMessage');
+    <main class="dashboard-main">
+      <div class="welcome-banner">
+        <h1>¡Bienvenido a Health Track!</h1>
+        <p>
+          Tu viaje hacia una vida más saludable comienza ahora. Monitorea tu
+          progreso y alcanza tus objetivos con nuestras herramientas
+          personalizadas.
+        </p>
+      </div>
 
-        // Manejar el envío del formulario
-        loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            login();
-        });
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-fire" style="color: #ff6b95"></i>
+          </div>
+          <div class="stat-number">1,250</div>
+          <div class="stat-label">Calorías Quemadas</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-shoe-prints" style="color: #6c63ff"></i>
+          </div>
+          <div class="stat-number">8,542</div>
+          <div class="stat-label">Pasos Hoy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-glass-whiskey" style="color: #00d4aa"></i>
+          </div>
+          <div class="stat-number">1.8L</div>
+          <div class="stat-label">Agua Consumida</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-moon" style="color: #667eea"></i>
+          </div>
+          <div class="stat-number">7h 30m</div>
+          <div class="stat-label">Sueño Promedio</div>
+        </div>
+      </div>
 
-        // Función de login
-        function login() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Seguimiento de Salud</h3>
+          <p>
+            Monitorea tus signos vitales, peso, presión arterial y más. Mantén
+            un registro completo de tu salud con gráficos interactivos.
+          </p>
+          <button class="btn-feature">
+            <i class="fas fa-chart-bar"></i> Comenzar Seguimiento
+          </button>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏃‍♂️</div>
+          <h3>Actividad Física</h3>
+          <p>
+            Registra tus entrenamientos, establece metas y recibe
+            recomendaciones personalizadas para mejorar tu condición física.
+          </p>
+          <button class="btn-feature">
+            <i class="fas fa-running"></i> Ver Actividad
+          </button>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🍎</div>
+          <h3>Nutrición Balanceada</h3>
+          <p>
+            Lleva un control de tu alimentación y recibe planes nutricionales
+            adaptados a tus objetivos de salud y preferencias.
+          </p>
+          <button class="btn-feature">
+            <i class="fas fa-utensils"></i> Planificar Comidas
+          </button>
+        </div>
+      </div>
 
-            // Validar campos
-            if (!username || !password) {
-                showMessage('Por favor, completa todos los campos', 'error');
-                return;
-            }
+      <div class="goal-indicator">
+        <h3>Tu Objetivo Principal</h3>
+        <p class="goal-text" id="userGoal">Cargando objetivo...</p>
+      </div>
+    </main>
 
-            // Verificar credenciales
-            if (users[username] && users[username].password === password) {
-                // Login exitoso
-                const user = users[username];
-                
-                // Guardar en localStorage (simula sesión)
-                localStorage.setItem('currentUser', JSON.stringify({
-                    username: username,
-                    name: user.name,
-                    email: user.email,
-                    role: user.role,
-                    lastLogin: new Date().toLocaleString()
-                }));
-
-                showDashboard(user);
-                showMessage('Login exitoso! Redirigiendo...', 'success');
-                
-            } else {
-                showMessage('Usuario o contraseña incorrectos', 'error');
-            }
-        }
-
-        // Mostrar dashboard
-        function showDashboard(user) {
-            document.getElementById('userName').textContent = user.name;
-            document.getElementById('userEmail').textContent = user.email;
-            document.getElementById('userRole').textContent = user.role;
-            document.getElementById('lastLogin').textContent = new Date().toLocaleString();
-            
-            loginContainer.classList.add('hidden');
-            dashboardContainer.classList.remove('hidden');
-        }
-
-        // Cerrar sesión
-        function logout() {
-            localStorage.removeItem('currentUser');
-            dashboardContainer.classList.add('hidden');
-            loginContainer.classList.remove('hidden');
-            loginForm.reset();
-            showMessage('Sesión cerrada correctamente', 'success');
-            setTimeout(() => loginMessage.innerHTML = '', 2000);
-        }
-
-        // Mostrar mensajes
-        function showMessage(message, type) {
-            loginMessage.innerHTML = `<div class="message ${type}">${message}</div>`;
-        }
-
-        // Verificar si ya hay una sesión activa al cargar la página
-        function checkExistingSession() {
-            const currentUser = localStorage.getItem('currentUser');
-            if (currentUser) {
-                const user = JSON.parse(currentUser);
-                showDashboard(user);
-            }
-        }
-
-        // Inicializar
-        checkExistingSession();
-    </script>
-</body>
+    <script src="scripts/dashboard.js"></script>
+  </body>
 </html>

@@ -1,307 +1,156 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión - Health Track</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-        }
-
-        :root {
-            --primary: #00D4AA;
-            --primary-dark: #00B894;
-            --primary-light: #80FFE5;
-            --secondary: #6C63FF;
-            --accent: #FF6B95;
-            --text: #2D3748;
-            --text-light: #718096;
-            --background: #FFFFFF;
-            --background-alt: #F8FAFC;
-            --background-dark: #0F172A;
-            --border: #E2E8F0;
-            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-
-        body {
-            color: var(--text);
-            line-height: 1.7;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.1"><polygon fill="white" points="0,1000 1000,0 1000,1000"/></svg>');
-            background-size: cover;
-        }
-
-        .login-container {
-            background: white;
-            border-radius: 24px;
-            box-shadow: var(--shadow-lg);
-            overflow: hidden;
-            width: 100%;
-            max-width: 450px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .login-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 40px 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .login-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.1"><polygon fill="white" points="0,1000 1000,0 1000,1000"/></svg>');
-            background-size: cover;
-        }
-
-        .login-header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 12px;
-            font-weight: 800;
-            position: relative;
-            z-index: 2;
-        }
-
-        .login-header p {
-            opacity: 0.9;
-            font-size: 1.1rem;
-            position: relative;
-            z-index: 2;
-            font-weight: 300;
-        }
-
-        .login-form {
-            padding: 40px;
-        }
-
-        .form-group {
-            margin-bottom: 24px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 600;
-            color: var(--text);
-            font-size: 1rem;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 16px 20px;
-            border: 2px solid var(--border);
-            border-radius: 16px;
-            font-size: 1rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: white;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.1);
-        }
-
-        .remember-forgot {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .remember-me input {
-            accent-color: var(--primary);
-        }
-
-        .remember-me label {
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-
-        .forgot-password {
-            color: var(--primary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .forgot-password:hover {
-            text-decoration: underline;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 16px 32px;
-            border-radius: 16px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            justify-content: center;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn-login {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            box-shadow: var(--shadow);
-        }
-
-        .btn-login:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .register-link {
-            text-align: center;
-            margin-top: 25px;
-            color: var(--text-light);
-        }
-
-        .register-link a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .register-link a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 480px) {
-            .login-form {
-                padding: 30px 20px;
-            }
-            
-            .login-header {
-                padding: 30px 20px;
-            }
-            
-            .login-header h1 {
-                font-size: 1.8rem;
-            }
-            
-            .remember-forgot {
-                flex-direction: column;
-                gap: 15px;
-                align-items: flex-start;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="login-container">
-        <div class="login-header">
-            <h1><i class="fas fa-heartbeat"></i> Iniciar Sesión</h1>
-            <p>Bienvenido de vuelta a Health Track</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel de Control - Health Track</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles/global.css" />
+    <link rel="stylesheet" href="styles/dashboard.css" />
+  </head>
+  <body>
+    <header class="dashboard-header">
+      <div class="header-content">
+        <div class="logo">
+          <div class="logo-icon">
+            <i class="fas fa-heartbeat"></i>
+          </div>
+          <span>Health Track</span>
         </div>
+        <div class="user-menu">
+          <div class="user-info">
+            <div class="user-name" id="userName">Usuario</div>
+            <div class="user-email" id="userEmail">usuario@email.com</div>
+          </div>
+          <button class="btn btn-logout" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+          </button>
+        </div>
+      </div>
+    </header>
 
-        <form class="login-form" id="loginForm">
-            <div class="form-group">
-                <label for="email"><i class="fas fa-envelope"></i> Correo Electrónico</label>
-                <input type="email" id="email" name="email" required placeholder="tu@email.com">
-            </div>
+    <nav class="dashboard-nav">
+      <div class="nav-content">
+        <ul class="nav-links">
+          <li>
+            <a href="#" class="active"><i class="fas fa-home"></i> Inicio</a>
+          </li>
+          <li>
+            <a href="./estadisticas.html"
+              ><i class="fas fa-chart-line"></i> Estadísticas</a
+            >
+          </li>
+          <li>
+            <a href="./nutricion.html"
+              ><i class="fas fa-utensils"></i> Nutrición</a
+            >
+          </li>
+          <li>
+            <a href="./actividad.html"
+              ><i class="fas fa-running"></i> Actividad</a
+            >
+          </li>
+          <li>
+            <a href="./sueno.html"><i class="fas fa-bed"></i> Sueño</a>
+          </li>
+          <li>
+            <a href="recordatorio.html"
+              ><i class="fas fa-bell"></i> Recordatorios</a
+            >
+          </li>
+          <li>
+            <a href="perfil.html"><i class="fas fa-user"></i> Mi Perfil</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-            <div class="form-group">
-                <label for="password"><i class="fas fa-lock"></i> Contraseña</label>
-                <input type="password" id="password" name="password" required placeholder="Ingresa tu contraseña">
-            </div>
+    <main class="dashboard-main">
+      <div class="welcome-banner">
+        <h1>¡Bienvenido a Health Track!</h1>
+        <p>
+          Tu viaje hacia una vida más saludable comienza ahora. Monitorea tu
+          progreso y alcanza tus objetivos con nuestras herramientas
+          personalizadas.
+        </p>
+      </div>
 
-            <div class="remember-forgot">
-                <div class="remember-me">
-                    <input type="checkbox" id="remember">
-                    <label for="remember">Recordarme</label>
-                </div>
-                <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
-            </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-fire" style="color: #ff6b95"></i>
+          </div>
+          <div class="stat-number">1,250</div>
+          <div class="stat-label">Calorías Quemadas</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-shoe-prints" style="color: #6c63ff"></i>
+          </div>
+          <div class="stat-number">8,542</div>
+          <div class="stat-label">Pasos Hoy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-glass-whiskey" style="color: #00d4aa"></i>
+          </div>
+          <div class="stat-number">1.8L</div>
+          <div class="stat-label">Agua Consumida</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-moon" style="color: #667eea"></i>
+          </div>
+          <div class="stat-number">7h 30m</div>
+          <div class="stat-label">Sueño Promedio</div>
+        </div>
+      </div>
 
-            <button type="submit" class="btn btn-login">
-                <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
-            </button>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Seguimiento de Salud</h3>
+          <p>
+            Monitorea tus signos vitales, peso, presión arterial y más. Mantén
+            un registro completo de tu salud con gráficos interactivos.
+          </p>
+          <button class="btn-feature">
+            <i class="fas fa-chart-bar"></i> Comenzar Seguimiento
+          </button>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏃‍♂️</div>
+          <h3>Actividad Física</h3>
+          <p>
+            Registra tus entrenamientos, establece metas y recibe
+            recomendaciones personalizadas para mejorar tu condición física.
+          </p>
+          <button class="btn-feature">
+            <i class="fas fa-running"></i> Ver Actividad
+          </button>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🍎</div>
+          <h3>Nutrición Balanceada</h3>
+          <p>
+            Lleva un control de tu alimentación y recibe planes nutricionales
+            adaptados a tus objetivos de salud y preferencias.
+          </p>
+          <button class="btn-feature">
+            <i class="fas fa-utensils"></i> Planificar Comidas
+          </button>
+        </div>
+      </div>
 
-            <div class="register-link">
-                ¿No tienes una cuenta? <a href="registro.html">Regístrate aquí</a>
-            </div>
-        </form>
-    </div>
+      <div class="goal-indicator">
+        <h3>Tu Objetivo Principal</h3>
+        <p class="goal-text" id="userGoal">Cargando objetivo...</p>
+      </div>
+    </main>
 
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            // Simular proceso de login
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Iniciando sesión...';
-            submitBtn.disabled = true;
-
-            setTimeout(() => {
-                // En una aplicación real, aquí validarías con el servidor
-                // Por ahora, redirigimos directamente al dashboard
-                window.location.href = 'dashboard.html';
-            }, 1500);
-        });
-    </script>
-</body>
+    <script src="scripts/dashboard.js"></script>
+  </body>
 </html>
