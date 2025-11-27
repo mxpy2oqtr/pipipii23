@@ -1,47 +1,21 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-}
-
 :root {
-  --primary: #00d4aa;
-  --primary-dark: #00b894;
-  --primary-light: #80ffe5;
-  --secondary: #6c63ff;
-  --accent: #ff6b95;
-  --text: #2d3748;
-  --text-light: #718096;
+  --primary: #2563eb;
+  --text: #1f2937;
+  --text-light: #6b7280;
   --background: #ffffff;
-  --background-alt: #f8fafc;
-  --background-dark: #0f172a;
-  --border: #e2e8f0;
-  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --background-alt: #f9fafb;
+  --border: #e5e7eb;
 }
 
 body {
+  font-family: 'Inter', sans-serif;
   color: var(--text);
-  line-height: 1.7;
   background: var(--background);
-  transition:
-    background-color 0.3s,
-    color 0.3s;
-}
-
-body.dark-mode {
-  --text: #f8fafc;
-  --text-light: #a0aec0;
-  --background: #0f172a;
-  --background-alt: #1e293b;
-  --border: #4a5568;
-  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  line-height: 1.6;
 }
 
 .container {
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -49,35 +23,21 @@ body.dark-mode {
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  padding: 16px 32px;
-  border-radius: 16px;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
   text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: none;
+  font-weight: 500;
+  transition: background-color 0.2s ease-in-out;
+  border: 1px solid transparent;
   cursor: pointer;
-  font-size: 1rem;
-  position: relative;
-  overflow: hidden;
 }
 
-.btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
-  transition: left 0.5s;
+.btn-primary {
+  background: var(--primary);
+  color: white;
 }
 
-.btn:hover::before {
-  left: 100%;
+.btn-primary:hover {
+  background: #1d4ed8;
 }
