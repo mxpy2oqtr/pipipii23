@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Track - Profile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="statistics.html">Statistics</a>
+        <a href="nutrition.html">Nutrition</a>
+        <a href="activity.html">Activity</a>
+        <a href="reminders.html">Reminders</a>
+        <a href="profile.html">Profile</a>
+    </nav>
+
+    <div class="container">
+        <header class="header">
+            <h1>Profile</h1>
+        </header>
+
+        <div class="card">
+            <h3>Personal Information</h3>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" value="John Doe">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="john.doe@example.com">
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Health Goals</h3>
+            <div class="form-group">
+                <label for="weight-goal">Weight Goal (kg)</label>
+                <input type="number" id="weight-goal" name="weight-goal" value="75">
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Settings</h3>
+            <div class="form-group">
+                <label for="notifications">Enable Notifications</label>
+                <input type="checkbox" id="notifications" name="notifications" checked>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Device Sync</h3>
+            <p>Connect your health devices.</p>
+            <button class="btn">Sync Devices</button>
+        </div>
+    </div>
+
+</body>
+</html>
