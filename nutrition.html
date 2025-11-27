@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Track - Nutrition</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="statistics.html">Statistics</a>
+        <a href="nutrition.html">Nutrition</a>
+        <a href="activity.html">Activity</a>
+        <a href="reminders.html">Reminders</a>
+        <a href="profile.html">Profile</a>
+    </nav>
+
+    <div class="container">
+        <header class="header">
+            <h1>Nutrition</h1>
+        </header>
+
+        <div class="card">
+            <h3>Log a Meal</h3>
+            <div class="form-group">
+                <label for="meal-type">Meal Type</label>
+                <select id="meal-type" name="meal-type">
+                    <option>Breakfast</option>
+                    <option>Lunch</option>
+                    <option>Dinner</option>
+                    <option>Snack</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="food-item">Food Item</label>
+                <input type="text" id="food-item" name="food-item" placeholder="e.g., Apple">
+            </div>
+            <button class="btn">Add Meal</button>
+        </div>
+
+        <div class="card">
+            <h3>Food Database</h3>
+            <p>Search for food items to see their nutritional information.</p>
+            <div class="form-group">
+                <input type="text" placeholder="Search foods...">
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Macronutrient Analysis</h3>
+            <div class="chart-container">
+                <div class="chart-placeholder">Macros chart placeholder</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Weekly Menu</h3>
+            <p>Your meal plan for the week.</p>
+        </div>
+    </div>
+
+</body>
+</html>

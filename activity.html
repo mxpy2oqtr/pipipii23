@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Track - Activity</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="statistics.html">Statistics</a>
+        <a href="nutrition.html">Nutrition</a>
+        <a href="activity.html">Activity</a>
+        <a href="reminders.html">Reminders</a>
+        <a href="profile.html">Profile</a>
+    </nav>
+
+    <div class="container">
+        <header class="header">
+            <h1>Activity</h1>
+        </header>
+
+        <div class="card">
+            <h3>Log a Workout</h3>
+            <div class="form-group">
+                <label for="workout-type">Workout Type</label>
+                <input type="text" id="workout-type" name="workout-type" placeholder="e.g., Running">
+            </div>
+            <div class="form-group">
+                <label for="duration">Duration (minutes)</label>
+                <input type="number" id="duration" name="duration">
+            </div>
+            <button class="btn">Add Workout</button>
+        </div>
+
+        <div class="card">
+            <h3>Calories Burned</h3>
+            <p>Today you have burned <strong>350 kcal</strong>.</p>
+        </div>
+
+        <div class="card">
+            <h3>Custom Routines</h3>
+            <p>Your personalized workout routines.</p>
+        </div>
+
+        <div class="card">
+            <h3>Progress Tracking</h3>
+            <div class="chart-container">
+                <div class="chart-placeholder">Progress chart placeholder</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
