@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Health Track - Registro</title>
+    <title>Health Track - Demo</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -43,37 +43,33 @@
       </div>
     </header>
 
-    <main>
-      <section class="register-section">
-        <div class="container">
-          <h2>Crea tu cuenta</h2>
-          <form class="register-form">
-            <div class="form-group">
-              <label for="name">Nombre</label>
-              <input type="text" id="name" name="name" required />
-            </div>
-            <div class="form-group">
-              <label for="email">Correo electrónico</label>
-              <input type="email" id="email" name="email" required />
-            </div>
-            <div class="form-group">
-              <label for="password">Contraseña</label>
-              <input type="password" id="password" name="password" required />
-            </div>
-            <div class="form-group">
-              <label for="password-confirm">Confirmar contraseña</label>
-              <input
-                type="password"
-                id="password-confirm"
-                name="password-confirm"
-                required
-              />
-            </div>
-            <button type="submit" class="btn btn-register">Registrarse</button>
-          </form>
+    <!-- Sección de Demo Video -->
+    <section class="demo-video" id="demo">
+      <div class="container">
+        <div class="section-title">
+          <h2>Descubre Health Track</h2>
+          <p>
+            Mira nuestro video demo y conoce todas las funcionalidades de la
+            aplicación
+          </p>
         </div>
-      </section>
-    </main>
+        <div class="video-container">
+          <iframe
+            id="demo-video-player"
+            src="https://www.youtube.com/embed/yd_uG3TtREs?si=i2cJb-SiZ3XDgsAE&enablejsapi=1"
+            title="Demo de Health Track"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          >
+          </iframe>
+          <div class="video-overlay">
+            <div class="play-indicator">
+              <i class="fas fa-play"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Pie de página -->
     <footer id="contacto">
@@ -84,11 +80,11 @@
             <div class="logo-text">Health Track</div>
           </div>
           <div class="footer-links">
-            <a href="#">Términos de Servicio</a>
-            <a href="#">Política de Privacidad</a>
+            <a href="./terminos.html">Términos de Servicio</a>
+            <a href="./privacidad.html">Política de Privacidad</a>
             <a href="./contacto.html">Contacto</a>
-            <a href="#">Soporte Técnico</a>
-            <a href="#">Blog de Salud</a>
+            <a href="./soporte.html">Soporte Técnico</a>
+            <a href="./blog.html">Blog de Salud</a>
           </div>
           <div class="footer-bottom">
             <p>&copy; 2025 Health Track. Todos los derechos reservados.</p>
